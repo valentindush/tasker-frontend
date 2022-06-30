@@ -11,16 +11,9 @@ import Profile from "./pages/main/profile";
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<Layout/>}>
-        <Route index  element={<Overview/>} />
-        <Route path="/tasks" element={<Tasks/>} />
-        <Route path="/calendar" element={<Calendar/>}/>
-        <Route path="/profile" element={<Profile/>} />
-        <Route path="/settings" element={<Settings/>} />
-      </Route>
-
-      <Route path="/login"  element={<Login/>}/>
-      <Route path="/signup" element={<SignUp/>} />
+      <Route path="/" element={<Layout/>} />
+      <Route path="/auth/login"  element={<Login/>}/>
+      <Route path="/auth/signup" element={<SignUp/>} />
     </Routes>
   );
 }
