@@ -7,8 +7,8 @@ export default function Layout() {
         <Sidebar />
 
         <div className='w-full h-full p-4'>
-          <div className='w-full h-full bg-[#EEF3F9] bg-opacity-70 rounded-xl overflow-auto p-8'>
-            <div className="flex h-full">
+          <div className='w-full h-full bg-[#EEF3F9] bg-opacity-70 rounded-xl overflow-auto p-8 pb-4'>
+            <div className="flex  h-full">
               <div className="w-[70%] h-full">
                 <div className="flex gap-1">
                   <div className="search bg-white h-[45px] w-full relative rounded-xl">
@@ -32,7 +32,7 @@ export default function Layout() {
                     </svg>
                   </div>
                 </div>
-                <div className="flex mt-3 gap-2">
+                <div className="flex mt-2 gap-2">
                   <div className="stats w-[60%] bg-white p-2 rounded-xl h-[35vh]">
 
                   </div>
@@ -40,12 +40,12 @@ export default function Layout() {
 
                   </div>
                 </div>
-                <div className="w-full bg-white mt-3 h-[53%] p-2 rounded-xl">
+                <div className="w-full bg-white mt-2 h-[54%] p-2 rounded-xl">
                 
                 </div>
               </div>
               <div className="w-[30%]">
-                CALENDAR
+                <div className="bg-white w-full p-2 rounded-xl h-full ml-[10px]"></div>
               </div>
             </div>
           </div>
