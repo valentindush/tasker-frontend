@@ -1,10 +1,43 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import Chart from './components/chart'
 import Sidebar from './components/sidebar'
 import Overview from './pages/main/overview'
+import Calendar from 'react-calendar'
+import 'react-calendar/dist/Calendar.css';
 
+import profileImg from './utils/profile.png'
+import Task from './components/task'
 export default function Layout() {
+
+  const recentTasks = [
+    {
+      id: 1,
+      title: 'Meeting with client',
+    },
+    {
+      id: 2,
+      title: 'Call with client',
+    },
+    {
+      id: 3,
+      title: 'Sign aggrement with client',
+    },
+    {
+      id: 4,
+      title: 'Meeting with client',
+    },
+    {
+      id: 5,
+      title: 'Call with client',
+    },
+    {
+      id: 6,
+      title: 'Sign aggrement with client',
+    },
+  ]
+
+  const [value,onChange] = useState(new Date());
   return (
     <div className='h-screen w-screen bg-[#001833] flex'>
         <Sidebar />
@@ -40,7 +73,38 @@ export default function Layout() {
                 </Routes>
               </div>
               <div className="w-[30%]">
-                <div className="bg-white w-full p-2 rounded-xl h-full ml-[10px]"></div>
+                <div className="bg-white w-full p-2 rounded-xl h-full ml-[10px] overflow-y-auto">
+                  
+                  <div className="profile w-full pt-5">
+                    <div className="img w-[200px] h-[200px] m-auto">
+                      <img className='w-full h-full rounded-full object-cover' src={profileImg} alt="profile" />
+                    </div>
+
+                    <div className="name w-full text-center pt-2">
+                      <h1 className="text-xl font-semibold text-gray-700">Samantha Cartel</h1>
+                      <p>Senior front-end developer at Salenix</p>
+                    </div>
+                  </div>
+                  
+                  <div className="">
+                    <Calendar onChange={onChange} value={value} />
+                  </div>
+                  <div className="">
+                    <h2 className='py-2 font-medium'>Recently added</h2>
+                    <div className="flex flex-col gap-1">
+                      {recentTasks.map((task)=>{
+                        return (
+                          <div key={task.id} className='border-[1px] p-2 border-gray-400 rounded-lg flex items-center gap-2 cursor-pointer hover:scale-95 transition duration-300 ease-out'>
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M13.3334 4L6.00002 11.3333L2.66669 8" stroke="#0075FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <p className='text-sm'>{task.title}</p>
+                          </div>
+                        )
+                      })}
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
