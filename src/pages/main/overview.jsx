@@ -1,6 +1,39 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import Chart from "../../components/chart";
+import Progress from "../../components/progress";
+import Task from "../../components/task";
 export default function Overview() {
+  const date = new Date();
+
+  const tasks = [
+    {
+      id: 1,
+      title: "Go to job interview at kigali innovation center",
+      type: "work",
+      completed: false,
+      setOn: "12 june 2022 10:02 am",
+      deadLine: "today at 2:00 pm",
+    },
+    {
+      id: 2,
+      title: "Learn web3.js and solidity in the next week",
+      type: "learning",
+      completed: true,
+      setOn: "12 june 2022 10:02 am",
+      deadLine: "today at 2:00 pm",
+    },
+    {
+      id: 3,
+      title: "Go to job interview at kigali innovation center",
+      type: "work",
+      completed: false,
+      setOn: "12 june 2022 10:02 am",
+      deadLine: "today at 2:00 pm",
+    }
+  ]
+
+
   return (
     <div className="h-full">
       <div className="flex mt-2 gap-2">
@@ -29,9 +62,37 @@ export default function Overview() {
             <Chart />
           </div>
         </div>
-        <div className="progress w-[40%] bg-white p-2 rounded-xl h-[38vh]"></div>
+        <div className="progress w-[40%] bg-white p-3 rounded-xl h-[38vh] relative">
+          <div className="header">
+            <h2 className="font-semibold text-gray-700">Your progress</h2>
+          </div>
+          <Progress value={75.03} />
+          <div className="flex justify-between px-4 mt-12">
+            <div className="flex items-center gap-2">
+              <div className="w-3 h-3 bg-[#0075FF] rounded-full"></div>
+              <span className="font-medium text-gray-700 text-sm">Progress</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-3 h-3 bg-[#074994] rounded-full"></div>
+              <span className="font-medium text-gray-700 text-sm">Finish</span>
+            </div>
+          </div>
+        </div>
       </div>
-      <div className="w-full bg-white mt-2 h-[54%] p-2 rounded-xl"></div>
+      <div className="w-full bg-white mt-2 h-[54%] overflow-auto p-3 rounded-xl">
+        <div className="flex justify-between items-start">
+          <div className="">
+            <h2 className="font-semibold text-gray-700">Tasks for today</h2>
+            <p className="text-xs font-medium ml-1 text-gray-600">Monday,12,July 2022</p>
+          </div>
+          <Link to="/tasks" className="text-xs hover:underline font-medium text-gray-600">view all tasks</Link>
+        </div>
+        <div className="tasks pt-4 flex flex-col gap-2">
+          {tasks.map((task)=>{
+            return <Task task={task} />
+          })}
+        </div>
+      </div>
     </div>
   );
 }
