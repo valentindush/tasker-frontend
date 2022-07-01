@@ -79,7 +79,7 @@ export default function Overview() {
           </div>
         </div>
       </div>
-      <div className="w-full bg-white mt-2 h-[54%] overflow-auto p-3 rounded-xl">
+      <div className="w-full bg-white mt-2 max-h-[47vh] overflow-auto p-3 rounded-xl">
         <div className="flex justify-between items-start">
           <div className="">
             <h2 className="font-semibold text-gray-700">Tasks for today</h2>
