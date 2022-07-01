@@ -1,5 +1,8 @@
 import React from 'react'
+import { Route, Routes } from 'react-router-dom'
+import Chart from './components/chart'
 import Sidebar from './components/sidebar'
+import Overview from './pages/main/overview'
 
 export default function Layout() {
   return (
@@ -7,7 +10,7 @@ export default function Layout() {
         <Sidebar />
 
         <div className='w-full h-full p-4'>
-          <div className='w-full h-full bg-[#EEF3F9] bg-opacity-70 rounded-xl overflow-auto p-8 pb-4'>
+          <div className='w-full h-full bg-[#EEF3F9] bg-opacity-70 rounded-xl overflow-auto p-6 pb-4'>
             <div className="flex  h-full">
               <div className="w-[70%] h-full">
                 <div className="flex gap-1">
@@ -16,7 +19,7 @@ export default function Layout() {
                       <path d="M12.8333 22.1667C17.988 22.1667 22.1667 17.988 22.1667 12.8333C22.1667 7.67867 17.988 3.5 12.8333 3.5C7.67867 3.5 3.5 7.67867 3.5 12.8333C3.5 17.988 7.67867 22.1667 12.8333 22.1667Z" stroke="#404346" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                       <path d="M24.5 24.5L19.425 19.425" stroke="#404346" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
-                    <input type="text" className="p-3 h-full pl-12 rounded-lg outline-none" placeholder="Search something " />
+                    <input type="text" className="p-3 h-full text-sm w-full pl-12 rounded-lg outline-none" placeholder="Search something " />
                   </div>
                   <div className="h-[45px] rounded-xl cursor-pointer w-[50px] bg-white flex items-center justify-center">
                     <svg className='opacity-70' width="23" height="23" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -32,17 +35,9 @@ export default function Layout() {
                     </svg>
                   </div>
                 </div>
-                <div className="flex mt-2 gap-2">
-                  <div className="stats w-[60%] bg-white p-2 rounded-xl h-[35vh]">
-
-                  </div>
-                  <div className="progress w-[40%] bg-white p-2 rounded-xl h-[35vh]">
-
-                  </div>
-                </div>
-                <div className="w-full bg-white mt-2 h-[54%] p-2 rounded-xl">
-                
-                </div>
+                <Routes>
+                  <Route path="/" element={<Overview/>} />
+                </Routes>
               </div>
               <div className="w-[30%]">
                 <div className="bg-white w-full p-2 rounded-xl h-full ml-[10px]"></div>
