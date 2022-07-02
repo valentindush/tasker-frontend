@@ -3,11 +3,13 @@ import { Route, Routes } from 'react-router-dom'
 import Chart from './components/chart'
 import Sidebar from './components/sidebar'
 import Overview from './pages/main/overview'
-import Calendar from 'react-calendar'
 import 'react-calendar/dist/Calendar.css';
-
+import Calendar from 'react-calendar'
 import profileImg from './utils/profile.png'
 import Task from './components/task'
+import Tasks from './pages/main/tasks'
+import CalendarMain from './pages/main/calendar'
+import Profile from './pages/main/profile'
 export default function Layout() {
 
   const recentTasks = [
@@ -70,6 +72,9 @@ export default function Layout() {
                 </div>
                 <Routes>
                   <Route path="/" element={<Overview/>} />
+                  <Route path='/tasks' element={<Tasks/>} />
+                  <Route path='/calendar' element={<CalendarMain/>} />
+                  <Route path='/profile' element={<Profile/>} />
                 </Routes>
               </div>
               <div className="w-[30%]">
@@ -94,7 +99,7 @@ export default function Layout() {
                     <div className="flex flex-col gap-1">
                       {recentTasks.map((task)=>{
                         return (
-                          <div key={task.id} className='border-[1px] p-2 border-gray-400 rounded-lg flex items-center gap-2 cursor-pointer hover:scale-95 transition duration-300 ease-out'>
+                          <div key={task.id} className='border-[1px] p-2 border-gray-400 rounded-lg flex items-center gap-2 cursor-pointer hover:scale-[0.98] transition duration-300 ease-out'>
                             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M13.3334 4L6.00002 11.3333L2.66669 8" stroke="#0075FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>

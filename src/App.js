@@ -11,7 +11,7 @@ import Profile from "./pages/main/profile";
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<Layout/>} />
+      <Route path="/*" element={<Layout/>} />
       <Route path="/auth/login"  element={<Login/>}/>
       <Route path="/auth/signup" element={<SignUp/>} />
     </Routes>

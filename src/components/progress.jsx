@@ -12,7 +12,7 @@ export default function Progress(props) {
                 </linearGradient>
             </defs>
             <circle  className='fill-white stroke-[20px]  stroke-[#eceff3]' cx="80" cy="80" r="70" stroke-linecap="round" />
-            <circle strokeDasharray={"472"} strokeDashoffset={`${472-(472*props.value/100)}`} className='fill-white stroke-[20px] stroke-dash stroke-[#0c52a3]' cx="80" cy="80" r="70" stroke-linecap="round" />
+            <circle fillRule='url(#GradientColor)' strokeDasharray={"472"} strokeDashoffset={`${472-(472*props.value/100)}`} className='fill-white stroke-[20px] stroke-dash stroke-[#0c52a3]' cx="80" cy="80" r="70" stroke-linecap="round" />
             
 
             </svg>

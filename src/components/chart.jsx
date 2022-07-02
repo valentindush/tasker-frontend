@@ -44,9 +44,10 @@ export default function Chart() {
         datasets: [
           {
             label: '',
-            data: [8, 12, 13, 12, 13, 12, 14],
+            data: [8, 10, 11, 10, 11, 12, 11],
             borderColor: '#0075FF',
             backgroundColor: '#0075FF',
+            tension: 0.4
           },
 
         ],
