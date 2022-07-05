@@ -8,7 +8,7 @@ export default function Profile() {
 
 
   const submit = () => {
-    
+
   }
 
   return (
@@ -35,7 +35,7 @@ export default function Profile() {
                 <input value={about} onChange={(e)=>setAbout(e.target.value)} className='outline-none border border-gray-500 rounded-lg p-2 w-full' type="text" placeholder='Anyting about you' />
               </div>
               <div className="field submit">
-                <button onClick={submit} className='p-2  mt-3 px-4 bg-[#0075FF] text-white hover:scale-95 transition duration-300 ease-out rounded-lg'>Update profile</button>
+                <button onClick={submit} className='p-2  mt-3 px-4 bg-[#0075FF] text-white hover:scale-95 text-sm transition duration-300 ease-out rounded-lg'>Update profile</button>
               </div>
             </div>
           </div>
