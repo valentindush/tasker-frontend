@@ -12,7 +12,7 @@ import settings from '../utils/settings.svg'
 import plus from '../utils/plus.svg'
 import user from '../utils/user.svg'
 
-export default function Sidebar() {
+export default function Sidebar(props) {
   const location = useLocation()
   const {pathname} = location
   const splitPath = pathname.split('/')
@@ -36,6 +36,10 @@ export default function Sidebar() {
                  <span>Calendar</span>
             </NavLink>
 
+            <div className="">
+              <button onClick={props.addTask} className='text-md text-white font-medium p-[10px] px-6 bg-[#0075FF] transition duration-300 ease-out rounded-lg ml-3 hover:scale-95 active:scale-95 absolute top-[65%]'>Add task</button>
+            </div>
+
             <div className="absolute bottom-[6vh] flex flex-col gap-2  w-1/2">
               <NavLink axact="true" to={"/profile"} className={`text-md text-white font-medium p-[10px] hover:bg-[#0075FF] transition duration-300 ease-out w-full rounded-lg flex items-center gap-2 ${splitPath[1] === "profile"?"bg-[#0075ff]":""}`}>
                     <img src={user} alt="menu-icon"/>
@@ -48,6 +52,8 @@ export default function Sidebar() {
             </div>
 
         </nav>
+
+        
     </div>
   )
 }

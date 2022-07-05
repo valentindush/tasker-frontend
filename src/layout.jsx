@@ -39,10 +39,17 @@ export default function Layout() {
     },
   ]
 
+  const [showAddTask, setShowAddTask] = useState(false)
+
+  const handleAddTask = () => {
+    setShowAddTask(!showAddTask)
+  }
+
+
   const [value,onChange] = useState(new Date());
   return (
     <div className='h-screen w-screen bg-[#001833] flex'>
-        <Sidebar />
+        <Sidebar showAddTask={showAddTask} addTask={setShowAddTask} />
 
         <div className='w-full h-full p-4'>
           <div className='w-full h-full bg-[#EEF3F9] bg-opacity-70 rounded-xl overflow-auto p-6 pb-4'>
@@ -113,6 +120,37 @@ export default function Layout() {
               </div>
             </div>
           </div>
+        </div>
+        <div className="flex items-center justify-center bg-black bg-opacity-40 absolute w-full h-full">
+              <div className="bg-white w-[400px] h-fit relative  rounded-xl p-3">
+                  <div className="flex flex-row-reverse justify-between">
+                    <button className='border-red-300 border w-6 flex items-center justify-center h-6 rounded-full'>
+                      <svg className='' width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                       <path d="M10.5 3.5L3.5 10.5" stroke="#BA4A4A" stroke-linecap="round" stroke-linejoin="round"/>
+                       <path d="M3.5 3.5L10.5 10.5" stroke="#BA4A4A" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+                    </button>
+                    <h2>New task</h2>
+                  </div>
+
+                  <div className="form">
+                    <div className="field">
+                      <label className=''>Description</label>
+                      <textarea placeholder={'what\'s the task about'} id="" cols="30" rows="10">
+                      </textarea>
+                    </div>
+                    <div className="field">
+                      <label>Choose category</label>
+                      <select>
+                        <option value="">Select category</option>
+                        <option value="">Category 1</option>
+                        <option value="">Category 2</option>
+                        <option value="">Category 3</option>
+                      </select>
+                      
+                    </div>
+                  </div>
+              </div>
         </div>
     </div>
   )
