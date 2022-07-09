@@ -30,20 +30,20 @@ export default function Tasks() {
   ]
 
   return (
-    <div className=''>
-      <div className="bg-white rounded-xl p-3 mt-2">
+    <div className='flex flex-col h-[94%] overflow-hidden'>
+      <div className="bg-white rounded-xl p-3 mt-2 h-1/2 overflow-auto  ">
         <h2 className="font-semibold text-gray-700">Tasks for today</h2>
         <span className='text-xs font-medium text-gray-700'>Thursday, 23 June 2022</span>
 
-        <div className="tasks pt-4 flex flex-col gap-1 max-h-[40vh] overflow-auto">
+        <div className="tasks pt-4 flex flex-col gap-1 ">
           {tasks.map((task)=>{
             return <Task task={task} />
           })}
         </div>
       </div>
-      <div className="bg-white rounded-xl p-3 mt-2">
+      <div className="bg-white rounded-xl p-3 mt-2 h-1/2 overflow-auto">
         <h2 className="font-semibold text-gray-700">All tasks</h2>  
-        <div className="tasks pt-4 flex flex-col gap-1 max-h-[31vh]  overflow-auto">
+        <div className="tasks pt-4 flex flex-col gap-1  ">
           {tasks.map((task)=>{
             return <Task task={task} />
           })}

@@ -35,9 +35,9 @@ export default function CalendarMain() {
 
   const [value,Onchange] = useState(new Date())
   return (
-    <div className='h-[94%]'>
-      <div className="bg-white mt-2 rounded-xl p-3 h-full overflow-auto">
-        <h2 className="font-semibold text-gray-700">View your tasks according to calendar</h2>
+    <div className='h-[92%]'>
+      <div className="bg-white mt-2  rounded-xl p-3 h-full overflow-auto">
+        <h2 className="font-semibold text-lg text-center text-gray-700">View your tasks according to calendar</h2>
 
         <div className="calendar">
           <Calendar value={value} onChange={Onchange} />

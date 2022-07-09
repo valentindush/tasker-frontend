@@ -3,7 +3,7 @@ import { Route, Routes } from 'react-router-dom'
 import Chart from './components/chart'
 import Sidebar from './components/sidebar'
 import Overview from './pages/main/overview'
-import 'react-calendar/dist/Calendar.css';
+import './components/calendar.css'
 import Calendar from 'react-calendar'
 import profileImg from './utils/profile.png'
 import Task from './components/task'
@@ -40,10 +40,6 @@ export default function Layout() {
   ]
 
   const [showAddTask, setShowAddTask] = useState(false)
-
-  const handleAddTask = () => {
-    setShowAddTask(!showAddTask)
-  }
 
 
   const [value,onChange] = useState(new Date());
@@ -121,37 +117,45 @@ export default function Layout() {
             </div>
           </div>
         </div>
-        <div className="flex items-center justify-center bg-black bg-opacity-40 absolute w-full h-full">
+        {showAddTask && <div className="flex items-center justify-center bg-black bg-opacity-40 absolute w-full h-full">
               <div className="bg-white w-[400px] h-fit relative  rounded-xl p-3">
                   <div className="flex flex-row-reverse justify-between">
-                    <button className='border-red-300 border w-6 flex items-center justify-center h-6 rounded-full'>
+                    <button onClick={()=>setShowAddTask(false)} className='border-red-300 border w-6 flex items-center justify-center h-6 rounded-full'>
                       <svg className='' width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                        <path d="M10.5 3.5L3.5 10.5" stroke="#BA4A4A" stroke-linecap="round" stroke-linejoin="round"/>
                        <path d="M3.5 3.5L10.5 10.5" stroke="#BA4A4A" stroke-linecap="round" stroke-linejoin="round"/>
                       </svg>
                     </button>
-                    <h2>New task</h2>
+                    <h2 className='font-medium text-gray-700'>New task</h2>
                   </div>
 
                   <div className="form">
                     <div className="field">
-                      <label className=''>Description</label>
-                      <textarea placeholder={'what\'s the task about'} id="" cols="30" rows="10">
+                      <label className='text-sm text-gray-700 block mt-5'>Description</label>
+                      <textarea placeholder={'what\'s the task about'} className="outline-none border border-gray-500 w-full p-2 font-normal text-gray-800 text-sm rounded-md">
                       </textarea>
-                    </div>
+                    </div> 
                     <div className="field">
-                      <label>Choose category</label>
-                      <select>
+                      <label className='text-sm block mt-3 text-gray-700'>Choose category</label>
+                      <select className='w-full rounded-md border border-gray-500 outline-none p-1'>
                         <option value="">Select category</option>
-                        <option value="">Category 1</option>
-                        <option value="">Category 2</option>
-                        <option value="">Category 3</option>
+                        <option value="">Work</option>
+                        <option value="">Learning</option>
+                        <option value="">Personal</option>
+                        <option value="">Travel</option>
                       </select>
                       
                     </div>
+                    <div className="field">
+                      <label className='text-sm block mt-3 text-gray-700'>Choose a deadline</label>
+                      <input type="date" placeholder='choose a date' className="p-1 border border-gray-500 rounded-md outline-none w-full" />
+                    </div>
+                    <div className="field">
+                      <button className='p-2 bg-[#0075ff] text-white mt-3 rounded-md text-sm hover:scale-95 cursor-pointer transition duration-300 ease-out'>Save task</button>
+                    </div>
                   </div>
               </div>
-        </div>
+        </div>}
     </div>
   )
 }

@@ -12,7 +12,7 @@ export default function Overview() {
       title: "Go to job interview at kigali innovation center",
       type: "work",
       completed: false,
-      setOn: "12 june 2022 10:02 am",
+      setOn: "12 june 2022 10:  02 am",
       deadLine: "today at 2:00 pm",
     },
     {
@@ -37,7 +37,7 @@ export default function Overview() {
   return (
     <div className="h-full">
       <div className="flex mt-2 gap-2">
-        <div className="stats w-[60%] bg-white p-3 font-semibold text-gray-700 rounded-xl h-[38vh]">
+        <div className="stats w-[60%] bg-white p-3 font-semibold text-gray-700 rounded-xl min-h-[250px]">
           <div className="header flex justify-between">
             <div className="txt">
               <h2 className="">
@@ -62,12 +62,12 @@ export default function Overview() {
             <Chart />
           </div>
         </div>
-        <div className="progress w-[40%] bg-white p-3 rounded-xl h-[38vh] relative">
+        <div className="progress w-[40%] bg-white p-3 rounded-xl min-h-[250px]  relative">
           <div className="header">
             <h2 className="font-semibold text-gray-700">Your progress</h2>
           </div>
-          <Progress value={75.03} />
-          <div className="flex justify-between px-4 mt-12">
+          <Progress value={55.03} />
+          <div className="flex justify-between px-4 mt-10">
             <div className="flex items-center gap-2">
               <div className="w-3 h-3 bg-[#0075FF] rounded-full"></div>
               <span className="font-medium text-gray-700 text-sm">Progress</span>
@@ -79,7 +79,7 @@ export default function Overview() {
           </div>
         </div>
       </div>
-      <div className="w-full bg-white mt-2 max-h-[47vh] overflow-auto p-3 rounded-xl">
+      <div className="w-full bg-white mt-2 max-h-[42%] overflow-auto p-3 rounded-xl">
         <div className="flex justify-between items-start">
           <div className="">
             <h2 className="font-semibold text-gray-700">Tasks for today</h2>
