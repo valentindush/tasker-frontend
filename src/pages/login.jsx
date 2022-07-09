@@ -21,7 +21,7 @@ export default function Login() {
 
               <button type='submit' className={`bg-[#0075ff] text-white w-full p-2 rounded-md mt-3`}>Login</button>
 
-              <p className='text-white text-center mt-3'>Not yet joined? <a href="/signup" className='text-blue-400'>Create account</a></p>
+              <p className='text-white text-center mt-3'>Not yet joined? <a href="/auth/signup" className='text-blue-400'>Create account</a></p>
             </form>
         </div>
       </div>
