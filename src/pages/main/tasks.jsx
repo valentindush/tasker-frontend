@@ -1,4 +1,5 @@
 import React from 'react'
+import { Fade } from 'react-reveal'
 import Task from '../../components/task'
 
 export default function Tasks() {
@@ -31,6 +32,7 @@ export default function Tasks() {
 
   return (
     <div className='flex flex-col h-[94%] overflow-hidden'>
+      <Fade left>
       <div className="bg-white rounded-xl p-3 mt-2 h-1/2 overflow-auto  ">
         <h2 className="font-semibold text-gray-700">Tasks for today</h2>
         <span className='text-xs font-medium text-gray-700'>Thursday, 23 June 2022</span>
@@ -49,6 +51,7 @@ export default function Tasks() {
           })}
         </div>
       </div>
+      </Fade>
     </div>
   )
 }

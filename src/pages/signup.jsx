@@ -4,6 +4,7 @@ import logo from '../utils/Logo.svg'
 import eye_off from '../utils/eye-off.svg'
 import eye from '../utils/eye.svg'
 import { ThreeCircles } from 'react-loader-spinner'
+import { Fade } from 'react-reveal'
 
 export default function SignUp() {
 
@@ -18,6 +19,7 @@ export default function SignUp() {
         <div className="logo m-auto w-fit">
           <img src={logo} alt="logo" />
         </div>
+        <Fade fade>
         <div className="w-[600px] px-12 pt-8 bg-[#072F5F] rounded-lg pb-16 scale-95">
             <h2 className='text-white font-semibold text-xl  pb-4 text-center'>Create new account</h2>
             <form action="#" className={`${!isLoading?"pointer-events-none opacity-60":""}`}>
@@ -49,6 +51,7 @@ export default function SignUp() {
                 <span className='text-center text-white'>Please wait . . .</span>
               </div>}
         </div>
+        </Fade>
       </div>
       </div>  
   )

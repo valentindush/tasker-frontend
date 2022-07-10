@@ -1,4 +1,5 @@
 import React from 'react'
+import { Fade } from 'react-reveal'
 import { Link } from 'react-router-dom'
 import { darkBg, primaryColor } from '../utils/colors'
 import logo from '../utils/Logo.svg'
@@ -10,6 +11,7 @@ export default function Login() {
         <div className="logo m-auto w-fit">
           <img src={logo} alt="logo" />
         </div>
+        <Fade left>
         <div className="w-[600px] px-12 pt-8 bg-[#072F5F] rounded-lg pb-20">
             <h2 className='text-white font-semibold text-xl  pb-4 text-center'>Welcome back</h2>
             <form action="#">
@@ -24,6 +26,7 @@ export default function Login() {
               <p className='text-white text-center mt-3'>Not yet joined? <a href="/auth/signup" className='text-blue-400'>Create account</a></p>
             </form>
         </div>
+        </Fade>
       </div>
     </div>  
   )

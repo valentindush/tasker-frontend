@@ -1,4 +1,5 @@
 import React from "react";
+import { Fade } from "react-reveal";
 import { Link } from "react-router-dom";
 import Chart from "../../components/chart";
 import Progress from "../../components/progress";
@@ -36,6 +37,7 @@ export default function Overview() {
 
   return (
     <div className="h-full">
+      <Fade left>
       <div className="flex mt-2 gap-2">
         <div className="stats w-[60%] bg-white p-3 font-semibold text-gray-700 rounded-xl min-h-[250px]">
           <div className="header flex justify-between">
@@ -93,6 +95,7 @@ export default function Overview() {
           })}
         </div>
       </div>
+      </Fade>
     </div>
   );
 }

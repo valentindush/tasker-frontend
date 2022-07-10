@@ -125,7 +125,9 @@ export default function Layout() {
             </div>
           </div>
         </div>
-        {showAddTask && <div className="flex items-center justify-center bg-black bg-opacity-40 absolute w-full h-full">
+        {showAddTask && 
+        <Fade left>
+        <div className="flex items-center justify-center bg-black bg-opacity-40 absolute w-full h-full">
               <div className="bg-white w-[400px] h-fit relative  rounded-xl p-3">
                   <div className="flex flex-row-reverse justify-between">
                     <button onClick={()=>setShowAddTask(false)} className='border-red-300 border w-6 flex items-center justify-center h-6 rounded-full'>
@@ -163,7 +165,8 @@ export default function Layout() {
                     </div>
                   </div>
               </div>
-        </div>}
+        </div>
+        </Fade>}
     </div>
   )
 }

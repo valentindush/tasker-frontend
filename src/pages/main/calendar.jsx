@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import Calendar from 'react-calendar'
+import { Fade } from 'react-reveal'
 import Task from '../../components/task'
 
 export default function CalendarMain() {
@@ -36,6 +37,7 @@ export default function CalendarMain() {
   const [value,Onchange] = useState(new Date())
   return (
     <div className='h-[92%]'>
+      <Fade left>
       <div className="bg-white mt-2  rounded-xl p-3 h-full overflow-auto">
         <h2 className="font-semibold text-lg text-center text-gray-700">View your tasks according to calendar</h2>
 
@@ -48,6 +50,7 @@ export default function CalendarMain() {
           })}
         </div>
       </div>
+      </Fade>
     </div>
   )
 }
