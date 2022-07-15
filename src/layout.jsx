@@ -11,6 +11,8 @@ import Tasks from './pages/main/tasks'
 import CalendarMain from './pages/main/calendar'
 import Profile from './pages/main/profile'
 import { Fade } from 'react-reveal'
+import { useEffect } from 'react'
+import {useNavigate} from 'react-router-dom'
 export default function Layout() {
 
   const recentTasks = [
@@ -38,12 +40,20 @@ export default function Layout() {
       id: 6,
       title: 'Sign aggrement with client',
     },
-  ]
+  ] 
 
+  const navigate = useNavigate()
   const [showAddTask, setShowAddTask] = useState(false)
-
-
   const [value,onChange] = useState(new Date());
+
+
+  useEffect(()=>{
+    const token = localStorage.getItem('tasker_info')
+    if(!token){
+      navigate('/auth/login')
+    }
+  },[])
+
   return (
     <div className='h-screen w-screen bg-[#001833] flex'>
        
