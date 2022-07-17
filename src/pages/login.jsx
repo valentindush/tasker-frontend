@@ -18,7 +18,7 @@ export default function Login() {
   useEffect((e)=>{
     const token = localStorage.getItem('tasker_info')
     if(token){
-      navigate('/')
+      // navigate('/')
     }
   },[])
 

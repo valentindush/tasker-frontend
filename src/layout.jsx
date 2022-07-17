@@ -13,6 +13,10 @@ import Profile from './pages/main/profile'
 import { Fade } from 'react-reveal'
 import { useEffect } from 'react'
 import {useNavigate} from 'react-router-dom'
+import axios from 'axios'
+import { apiRoutes } from './utils/apiRoutes'
+import { ThreeCircles, ThreeDots } from 'react-loader-spinner'
+
 export default function Layout() {
 
   const recentTasks = [
@@ -46,6 +50,8 @@ export default function Layout() {
   const [showAddTask, setShowAddTask] = useState(false)
   const [value,onChange] = useState(new Date());
 
+  
+
 
   useEffect(()=>{
     const token = localStorage.getItem('tasker_info')
@@ -53,6 +59,52 @@ export default function Layout() {
       navigate('/auth/login')
     }
   },[])
+
+  //GETTING TASK FROM API AND SETTING IT TO STATE
+
+  const [tasks, setTasks] = useState([])
+
+  useEffect(()=>{
+    console.log(localStorage.getItem("tasker_info"))
+    axios.get(apiRoutes.gettasks,{
+      token: JSON.parse(localStorage.getItem('tasker_info'))
+    }).then((res)=>{
+      console.log(res)
+    }).catch((err)=>{
+      console.log(err);
+    })
+  },[])
+
+  const [desc,setDesc] = useState("")
+  const [category,setCategory] = useState("")
+  const [deadline,setDeadline] = useState("2022-02-02")
+
+  const [isLoading,setIsLoading ]  = useState(false)
+  const [txtSuccess,setTxtSuccess] = useState("")
+  const [txtError,setTxtError] = useState("")
+  const addTask = ()=>{
+    setIsLoading(true)
+    axios.post(apiRoutes.addtask,{
+      token: localStorage.getItem("tasker_info"),
+      type: category,
+      description: desc,
+      deadline:deadline
+    }).then(res=>{
+      setIsLoading(false)
+      if(res.data.status){
+        setTxtSuccess("Task added successfully")
+
+        setTimeout(() => {
+          setShowAddTask(false)
+          setTxtSuccess("")
+        }, 1000);
+      }
+    }).catch(res=>{
+      setIsLoading(false)
+      setTxtError("Oops! there was an error while adding task")
+      console.log(res)
+    })
+  }
 
   return (
     <div className='h-screen w-screen bg-[#001833] flex'>
@@ -136,7 +188,7 @@ export default function Layout() {
           </div>
         </div>
         {showAddTask && 
-        <Fade left>
+        <Fade duration={500} left>
         <div className="flex items-center justify-center bg-black bg-opacity-40 absolute w-full h-full">
               <div className="bg-white w-[400px] h-fit relative  rounded-xl p-3">
                   <div className="flex flex-row-reverse justify-between">
@@ -152,27 +204,34 @@ export default function Layout() {
                   <div className="form">
                     <div className="field">
                       <label className='text-sm text-gray-700 block mt-5'>Description</label>
-                      <textarea placeholder={'what\'s the task about'} className="outline-none border border-gray-500 w-full p-2 font-normal text-gray-800 text-sm rounded-md">
+                      <textarea value={desc} onChange={(e)=>setDesc(e.target.value)} placeholder={'what\'s the task about'} className="outline-none border border-gray-500 w-full p-2 font-normal text-gray-800 text-sm rounded-md">
                       </textarea>
                     </div> 
                     <div className="field">
                       <label className='text-sm block mt-3 text-gray-700'>Choose category</label>
-                      <select className='w-full rounded-md border border-gray-500 outline-none p-1'>
+                      <select value={category} onChange={(e)=>setCategory(e.target.value)} className='w-full text-sm rounded-md border border-gray-500 outline-none p-1'>
                         <option value="">Select category</option>
-                        <option value="">Work</option>
-                        <option value="">Learning</option>
-                        <option value="">Personal</option>
-                        <option value="">Travel</option>
+                        <option value="work">Work</option>
+                        <option value="learning">Learning</option>
+                        <option value="personal">Personal</option>
+                        <option value="travel">Travel</option>
+                        <option value="others">Others</option>
                       </select>
                       
                     </div>
                     <div className="field">
                       <label className='text-sm block mt-3 text-gray-700'>Choose a deadline</label>
-                      <input type="date" placeholder='choose a date' className="p-1 border border-gray-500 rounded-md outline-none w-full" />
+                      <input value={deadline} onChange={(e)=>setDeadline(e.target.value)} type="date" placeholder='choose a date' className="p-1 text-sm border border-gray-500 rounded-md outline-none w-full" />
                     </div>
+                    {isLoading && <div className="loader absolute top-1/2 left-[40%]">
+                      <ThreeCircles width={70} height={70} color='#0075ff' />
+                    </div>}
                     <div className="field">
-                      <button className='p-2 bg-[#0075ff] text-white mt-3 rounded-md text-sm hover:scale-95 cursor-pointer transition duration-300 ease-out'>Save task</button>
+                      <button onClick={addTask} className='p-2 bg-[#0075ff] text-white mt-3 rounded-md text-sm hover:scale-95 cursor-pointer transition duration-300 ease-out'>Save task</button>
                     </div>
+                    <p className={`text-green-500 text-sm`}>{txtSuccess}</p>
+                    <p className={`text-red-500 text-sm`}>{txtError}</p>
+
                   </div>
               </div>
         </div>
