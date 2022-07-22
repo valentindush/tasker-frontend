@@ -23,7 +23,7 @@ export default function SignUp() {
   useEffect((e)=>{
     const token = localStorage.getItem('tasker_info')
     if(token){
-      navigate('/')
+      // navigate('/')
     }
   },[])
 
@@ -48,7 +48,7 @@ export default function SignUp() {
       }
     }).catch(err=>{
       setIsLoading(false)
-      setError(err.response.data.message)
+      setError("Something went wrong! please try again later")
     })
 
   } 

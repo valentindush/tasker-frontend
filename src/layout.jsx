@@ -21,7 +21,7 @@ import { TaskContext } from './pages/taskContext'
 
 export default function Layout() {
 
-  const recentTasks = [
+  const [recentTaks,setRecentTaks] = useState([
     {
       id: 1,
       title: 'Meeting with client',
@@ -46,14 +46,11 @@ export default function Layout() {
       id: 6,
       title: 'Sign aggrement with client',
     },
-  ] 
+  ] )
 
   const navigate = useNavigate()
   const [showAddTask, setShowAddTask] = useState(false)
   const [value,onChange] = useState(new Date());
-
-  
-
 
   useEffect(()=>{
     const token = localStorage.getItem('tasker_info')
@@ -67,16 +64,24 @@ export default function Layout() {
   const [tasks, setTasks] = useState([])
 
   useEffect(()=>{
-    console.log(localStorage.getItem("tasker_info"))
-    axios.post(apiRoutes.gettasks,{
-      token: JSON.parse(localStorage.getItem('tasker_info'))
-    }).then((res)=>{
-      if(res.data.status){
-        setTasks(res.data.tasks)
-      }
-    }).catch((err)=>{
-      console.log(err);
-    })
+
+    const myHeaders = new Headers();
+    myHeaders.append("Authorization", "Bearer " + localStorage.getItem('tasker_info'));
+
+    const requestOptions = {
+      method: 'GET',
+      headers: myHeaders,
+      redirect: 'follow'
+    };
+
+    fetch(apiRoutes.gettasks, requestOptions)
+      .then(response => response.json())
+      .then((result) => {
+        console.log(result)
+      })
+      .catch((error) => {
+        
+      });
   },[])
 
   const [desc,setDesc] = useState("")
@@ -109,7 +114,6 @@ export default function Layout() {
       console.log(res)
     })
   }
-  useContext(TaskContext)
   return (
     
     <TaskContext.Provider value={tasks}>
