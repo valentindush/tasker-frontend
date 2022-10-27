@@ -61,25 +61,25 @@ export default function SignUp() {
           <img src={logo} alt="logo" />
         </div>
         <Fade fade>
-        <div className="w-[600px] px-12 pt-8 bg-[#072F5F] rounded-lg pb-16 scale-95">
-            <h2 className='text-white font-semibold text-xl  pb-4 text-center'>Create new account</h2>
+        <div className="w-[600px] px-12 py-8 bg-[#072F5F] rounded-lg  scale-95">
+            <h2 className='text-gray-300 font-medium text-lg  pb-4 text-center'>Create new account</h2>
             <form onSubmit={(e)=>handleSignup(e)} action="#" className={`${isLoading?"pointer-events-none opacity-60":""}`}>
-              <label className="block text-md text-white pb-2">Full name</label>
-              <input value={names} onChange={(e)=>setNames(e.target.value)} type="text" className=' border-[1px] border-white outline-none p-[8px] bg-transparent w-full rounded-md px-2 text-white focus:border-blue-400' placeholder='Your name' />
-              <label className="block text-md text-white pb-2 mt-4">Email</label>
-              <input value={email} onChange={(e)=>setEmail(e.target.value)} type="email" className=' border-[1px] border-white outline-none p-[8px] bg-transparent w-full rounded-md px-2 text-white focus:border-blue-400' placeholder='Your email address' />
+              <label className="block text-md text-gray-300 pb-2">Full name</label>
+              <input value={names} onChange={(e)=>setNames(e.target.value)} type="text" className=' border-[1px] border-white outline-none p-[8px] bg-transparent w-full rounded-md px-2 text-sm text-gray-300 focus:border-blue-400' placeholder='Your name' />
+              <label className="block text-md text-gray-300 pb-2 mt-4">Email</label>
+              <input value={email} onChange={(e)=>setEmail(e.target.value)} type="email" className=' border-[1px] border-white outline-none p-[8px] bg-transparent w-full rounded-md px-2 text-gray-300 text-sm focus:border-blue-400' placeholder='Your email address' />
               
               <div className="relative">
-                <label className="block text-md text-white pb-2 mt-4">Password</label>
-                <input value={password} onChange={(e)=>setPassword(e.target.value)} type={`${togglePassword?"text":"password"}`} className=' border-[1px] border-white outline-none p-[8px] bg-transparent w-full rounded-md px-2 text-white focus:border-blue-400' placeholder='Choose password' />
+                <label className="block text-md text-gray-300 pb-2 mt-4">Password</label>
+                <input value={password} onChange={(e)=>setPassword(e.target.value)} type={`${togglePassword?"text":"password"}`} className=' border-[1px] border-gray-300 outline-none p-[8px] bg-transparent w-full rounded-md px-2 text-gray-300 text-sm focus:border-blue-400' placeholder='Choose password' />
                 {!togglePassword?<img onClick={()=>setTogglePassword(true)} src={eye_off} alt="eye" className='absolute cursor-pointer right-2 bottom-3 opacity-90' />:
                 <img onClick={()=>setTogglePassword(false)} src={eye} alt="eye" className='absolute cursor-pointer right-2 bottom-3 opacity-90' />}
               </div>
 
                 <p className='text-sm text-red-400 mt-2 text-center'>{error}</p>
-              <button type='submit' className={`bg-[#0075ff] text-white w-full p-2 rounded-md mt-5`}>Create account</button>
+              <button type='submit' className={`bg-[#0075ff] text-gray-300 w-full p-2 rounded-md mt-5 text-sm`}>Create account</button>
 
-              <p className='text-white text-center mt-3'>Already joined? <a href="/auth/login" className='text-blue-400'>login now</a></p>
+              <p className='text-white text-sm text-center mt-3'>Already joined? <a href="/auth/login" className='text-blue-400'>login now</a></p>
 
             </form>
             {isLoading&&

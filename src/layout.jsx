@@ -1,12 +1,10 @@
 import React, { useState } from 'react'
 import { Route, Routes } from 'react-router-dom'
-import Chart from './components/chart'
 import Sidebar from './components/sidebar'
 import Overview from './pages/main/overview'
 import './components/calendar.css'
 import Calendar from 'react-calendar'
 import profileImg from './utils/profile.png'
-import Task from './components/task'
 import Tasks from './pages/main/tasks'
 import CalendarMain from './pages/main/calendar'
 import Profile from './pages/main/profile'
@@ -16,41 +14,17 @@ import {useNavigate} from 'react-router-dom'
 import axios from 'axios'
 import { apiRoutes } from './utils/apiRoutes'
 import { ThreeCircles, ThreeDots } from 'react-loader-spinner'
-import { useContext } from 'react'
 import { TaskContext } from './pages/taskContext'
 
 export default function Layout() {
 
-  const [recentTaks,setRecentTaks] = useState([
-    {
-      id: 1,
-      title: 'Meeting with client',
-    },
-    {
-      id: 2,
-      title: 'Call with client',
-    },
-    {
-      id: 3,
-      title: 'Sign aggrement with client',
-    },
-    {
-      id: 4,
-      title: 'Meeting with client',
-    },
-    {
-      id: 5,
-      title: 'Call with client',
-    },
-    {
-      id: 6,
-      title: 'Sign aggrement with client',
-    },
-  ] )
+  const [recentTasks,setRecentTaks] = useState([])
 
   const navigate = useNavigate()
   const [showAddTask, setShowAddTask] = useState(false)
   const [value,onChange] = useState(new Date());
+  const [dataLoaded,setDataLoaded] = useState(false)
+
 
   useEffect(()=>{
     const token = localStorage.getItem('tasker_info')
@@ -62,11 +36,14 @@ export default function Layout() {
   //GETTING TASK FROM API AND SETTING IT TO STATE
 
   const [tasks, setTasks] = useState([])
+  const [taskErr,setTaskErr] = useState(null)
 
-  useEffect(()=>{
 
+  const getTasks = ()=>{
+    const token = localStorage.getItem("tasker_info")
+    if(!token) return
     const myHeaders = new Headers();
-    myHeaders.append("Authorization", "Bearer " + localStorage.getItem('tasker_info'));
+    myHeaders.append("Authorization", "Bearer " + token);
 
     const requestOptions = {
       method: 'GET',
@@ -74,21 +51,35 @@ export default function Layout() {
       redirect: 'follow'
     };
 
+    setIsLoading2(true)
     fetch(apiRoutes.gettasks, requestOptions)
       .then(response => response.json())
       .then((result) => {
-        console.log(result)
+        setIsLoading2(false)
+        setTasks(result.tasks)
+        setRecentTaks(tasks)
+        setDataLoaded(true)
       })
       .catch((error) => {
-        
+        setIsLoading2(false)
+        console.log('error', error);
+        setDataLoaded(false)
+        setTaskErr("Something Went wrong! check your internet connection")
       });
+  }
+
+  useEffect(()=>{
+    getTasks()
   },[])
+
+  
 
   const [desc,setDesc] = useState("")
   const [category,setCategory] = useState("")
   const [deadline,setDeadline] = useState("2022-02-02")
 
   const [isLoading,setIsLoading ]  = useState(false)
+  const [isLoading2,setIsLoading2] = useState(false)
   const [txtSuccess,setTxtSuccess] = useState("")
   const [txtError,setTxtError] = useState("")
   const addTask = ()=>{
@@ -107,6 +98,7 @@ export default function Layout() {
           setShowAddTask(false)
           setTxtSuccess("")
         }, 1000);
+        getTasks()
       }
     }).catch(res=>{
       setIsLoading(false)
@@ -114,6 +106,8 @@ export default function Layout() {
       console.log(res)
     })
   }
+
+
   return (
     
     <TaskContext.Provider value={tasks}>
@@ -122,9 +116,13 @@ export default function Layout() {
        <Sidebar showAddTask={showAddTask} addTask={setShowAddTask} />
 
 
-       <div className='w-full h-full p-4'>
-         <div className='w-full h-full bg-[#EEF3F9] bg-opacity-70 rounded-xl overflow-auto p-6 pb-4'>
-           <div className="flex  h-full">
+       <div className='w-full h-full p-4 relative'>
+        {isLoading2&&<div className="absolute z-10 top-[40%] left-[40%]">
+          <ThreeCircles color='#0075ff' />
+          
+        </div>}
+         <div className={`w-full h-full z-0 bg-[#EEF3F9] bg-opacity-70 ${isLoading2?"pointer-events-none opacity-40":""} rounded-xl overflow-auto p-6 pb-4`}>
+          {dataLoaded?<div className="flex  h-full">
              <div className="w-[70%] h-full">
                <div className="flex gap-1">
                  <Fade right>
@@ -181,11 +179,11 @@ export default function Layout() {
                    <div className="flex flex-col gap-1">
                      {recentTasks.map((task)=>{
                        return (
-                         <div key={task.id} className='border-[1px] p-2 border-gray-400 rounded-lg flex items-center gap-2 cursor-pointer hover:scale-[0.98] transition duration-300 ease-out'>
+                         <div key={task._id} className='border-[1px] p-2 border-gray-400 rounded-lg flex items-center gap-2 cursor-pointer hover:scale-[0.98] transition duration-300 ease-out'>
                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                <path d="M13.3334 4L6.00002 11.3333L2.66669 8" stroke="#0075FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                            </svg>
-                           <p className='text-sm'>{task.title}</p>
+                           <p className='text-sm'>{task.description}</p>
                          </div>
                        )
                      })}
@@ -194,7 +192,11 @@ export default function Layout() {
                </div>
                </Fade>
              </div>
-           </div>
+           </div>:
+           <div className='flex flex-col items-center justify-center'>
+            <p className='text-center mt-24 text-red-500'>Something went wrong please check your internet connection</p>
+            <button className='p-2 px-5 bg-red-500 mx-auto text-gray-300 mt-4 rounded-lg' onClick={getTasks}>Retry</button>
+           </div>}
          </div>
        </div>
        {showAddTask && 
@@ -246,7 +248,7 @@ export default function Layout() {
              </div>
        </div>
        </Fade>}
-   </div>
+      </div>
     </TaskContext.Provider>
   )
 }

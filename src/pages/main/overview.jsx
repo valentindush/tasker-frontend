@@ -1,39 +1,60 @@
+import axios from "axios";
 import React from "react";
+import { useContext } from "react";
 import { Fade } from "react-reveal";
 import { Link } from "react-router-dom";
 import Chart from "../../components/chart";
 import Progress from "../../components/progress";
 import Task from "../../components/task";
+import { apiRoutes } from "../../utils/apiRoutes";
+import { TaskContext } from "../taskContext";
 export default function Overview() {
+
   const date = new Date();
+  const tasks = useContext(TaskContext)
+  const tasksForToday = []
+  tasks.forEach((task)=>{
+    const today = new Date()
+    const deadlineDate = new Date(task.deadline)
 
-  const tasks = [
-    {
-      id: 1,
-      title: "Go to job interview at kigali innovation center",
-      type: "work",
-      completed: false,
-      setOn: "12 june 2022 10:  02 am",
-      deadLine: "today at 2:00 pm",
-    },
-    {
-      id: 2,
-      title: "Learn web3.js and solidity in the next week",
-      type: "learning",
-      completed: true,
-      setOn: "12 june 2022 10:02 am",
-      deadLine: "today at 2:00 pm",
-    },
-    {
-      id: 3,
-      title: "Go to job interview at kigali innovation center",
-      type: "work",
-      completed: false,
-      setOn: "12 june 2022 10:02 am",
-      deadLine: "today at 2:00 pm",
+    const day = deadlineDate.getDay()
+    const month = deadlineDate.getMonth()
+    const year = deadlineDate.getFullYear()
+
+    const day_b = today.getDay()
+    const month_b = today.getMonth()
+    const year_b = today.getFullYear()
+
+    if(day === day_b && month === month_b && year ===  year_b){
+      tasksForToday.push(task)
     }
-  ]
+    
+  })
 
+
+  const editTask = (id)=>{
+
+  }
+
+  const deleteTask = (id)=>{
+
+    const headers = new Headers()
+    headers.append("Authorization", "Bearer " + localStorage.getItem('tasker_info'))
+    const requestOptions = {
+      method: "DELETE",
+      headers: headers,
+      redirect: 'follow'
+    }
+
+    fetch(apiRoutes.deletetask+id)
+    .then((res)=>res.json())
+    .then((res)=>{
+      console.log(res)
+    }).catch((err)=>{
+      throw err
+    })
+    
+  }
 
   return (
     <div className="h-full">
@@ -90,7 +111,7 @@ export default function Overview() {
           <Link to="/tasks" className="text-xs hover:underline font-medium text-gray-600">view all tasks</Link>
         </div>
         <div className="tasks pt-4 flex flex-col gap-2">
-          {tasks.map((task)=>{
+          {tasksForToday.map((task)=>{
             return <Task task={task} />
           })}
         </div>
