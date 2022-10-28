@@ -62,7 +62,6 @@ export default function Layout() {
       })
       .catch((error) => {
         setIsLoading2(false)
-        console.log('error', error);
         setDataLoaded(false)
         setTaskErr("Something Went wrong! check your internet connection")
       });

@@ -4,5 +4,5 @@ export const apiRoutes = {
     signup: host + "/api/auth/signup",
     addtask: host + "/api/task/addtask",
     gettasks: host + "/api/task/gettasks",
-    deletetask: host + "/api/task/delete/"
+    deletetask: host + "/api/task/deletetask/"
 }

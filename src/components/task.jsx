@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-
+import {apiRoutes} from '../utils/apiRoutes'
 export default function Task(props) {
     const [task,setTask] = useState(props.task)
 
@@ -11,11 +11,25 @@ export default function Task(props) {
         year: "numeric",
         weekday: "short"
     }
-
     const colors = []
     colors["work"] = "blue-400";colors["learning"] = "pink-400";colors["personal"] = "slate-400";colors["travel"]="green-400";colors["others"]="red-400"
 
     const removeTask = ()=>{
+        const task_id  = task._id
+        let headers  = new Headers()
+        headers.append('Content-Type','application/json')
+        headers.append('Authorization',`Bearer ${localStorage.getItem('tasker_info')}`)
+        const requestOptions = {
+            method: 'DELETE',
+            headers: headers,
+            redirect: 'follow'
+        }
+
+        fetch(apiRoutes.deletetask+task_id,requestOptions)
+        .then(response => response.json())
+        .then(result => {
+            console.log(result)
+        })
 
     }
 
